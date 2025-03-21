@@ -1,23 +1,38 @@
-
 const express = require("express");
-const http = require("http");
 const path = require("path");
-const { Server } = require("socket.io");
 const db = require("./db/connection"); // Tambah koneksi DB
+
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
 
-const PORT = 3001;
+// Buat HTTP server dari Express app
+const server = require('http').createServer(app);
 
-// Serve static files from 'public' directory
-const publicPath = path.join(__dirname, "../public");
-app.use(express.static(publicPath));
+// Inisialisasi Socket.IO
+const { Server } = require('socket.io');
+const io = new Server(server);  // ✅ inisialisasi io
 
-// Serve index.html for root
-app.get("/", (req, res) => {
-  res.sendFile(path.join(publicPath, "index.html"));
+const PORT = 3000;
+
+// Middleware: Serve static files dari folder 'public'
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+// Route utama: kirim file index.html dari root project
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
+
+// Socket.IO connection handler
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+
+  // Tambah event lainnya sesuai kebutuhan
+});
+
+
 
 // WebRTC signaling and chat handling
 io.on("connection", (socket) => {
