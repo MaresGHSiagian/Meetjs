@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Virtual Meeting</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Top Bar with modern design -->
+  <div class="top-bar">
+    <h2><i class="fas fa-video"></i> Virtual Meeting</h2>
+    <div id="roomLinkContainer" class="room-link hidden">
+      <div class="link-wrapper"></div>
+        <input id="shareLink" type="text" readonly />
+        <button id="copyBtn" class="modern-button"><i class="fas fa-copy"></i> Copy Link</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modernized Join Room Section -->
+  <div class="join-room" id="joinRoomBox">
+    <div class="join-container">
+      <div class="form-group">
+        <input id="nameInput" type="text" placeholder="Enter Your Name" />
+        <input id="roomInput" type="text" placeholder="Enter Room Name" />
+        <button id="joinBtn" class="modern-button primary"><i class="fas fa-sign-in-alt"></i> Join Room</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced Meeting Interface -->
+  <div class="container hidden" id="meetingContainer">
+    <div class="grid" id="participants">
+      <!-- Dynamic participant videos -->
+    </div>
+
+    <!-- Modernized Control Panel -->
+    <div class="controls">
+      <button id="muteBtn" class="control-button" title="Mic"><i class="fas fa-microphone"></i></button>
+      <button id="cameraBtn" class="control-button" title="Camera"><i class="fas fa-video"></i></button>
+      <button id="screenBtn" class="control-button" title="Screen Share"><i class="fas fa-desktop"></i></button>
+      <button id="chatToggleBtn" class="control-button" title="Chat"><i class="fas fa-comments"></i></button>
+      <button id="endCallBtn" class="control-button danger" title="End Call"><i class="fas fa-phone-slash"></i></button>
+    </div>
+  </div>
+
+<!-- Chat Room -->
+<div id="chatRoom" class="chat-room hidden">
+  <!-- Header Chat dengan Close Button -->
+  <div class="chat-header">
+    <h3><i class="fas fa-comments"></i>Pesan</h3>
+    <button id="chatCloseBtn" class="close-button"><i class="fas fa-times"></i></button>
+  </div>
+
+  <!-- Chat Messages -->
+  <div class="chat-messages" id="chatMessages">
+    <!-- Pesan akan muncul di sini -->
+  </div>
+
+  <!-- Input Chat di Bawah -->
+  <div class="chat-input-container">
+    <div class="input-wrapper">
+      <input type="text" id="chatInput" placeholder="Send a message to everyone..." />
+      <button id="sendBtn" class="send-button"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Enhanced Modal Design -->
+  <div id="confirmEndCall" class="modal hidden">
+    <div class="modal-content">
+      <h3><i class="fas fa-exclamation-triangle"></i> Leave Meeting</h3>
+      <p>Are you sure you want to leave the meeting?</p>
+      <div class="modal-buttons">
+        <button id="confirmNo" class="modal-button secondary"><i class="fas fa-times"></i> Cancel</button>
+        <button id="confirmYes" class="modal-button danger"><i class="fas fa-check"></i> Leave</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
